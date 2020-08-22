@@ -1,39 +1,52 @@
 const minthril = require('minthril');
-const hyperx = require('hyperx');
-const html = hyperx(minthril);
+const html = require('hyperx')(minthril);
 
 const createForm = require('../');
-const formFieldText = require('../formFieldText');
-const formFieldSelect = require('../formFieldSelect');
+const createTextInput = require('../createTextInput');
+const createSelectInput = require('../createSelectInput');
+const createCheckboxInput = require('../createCheckboxInput');
 
 const eventLog = [];
 
-function demoApp (app) {
-  const myForm = createForm(minthril, {
-    fields: [{
-      name: 'firstName',
-      label: 'First Name',
-      component: formFieldText,
-      autoFocus: true,
-      initialValue: 'Joe'
-    }, {
-      name: 'lastName',
-      label: 'Last Name',
-      component: formFieldText,
-      initialValue: 'Bloggs'
-    }, {
-      name: 'location',
-      label: 'Location',
-      component: formFieldSelect,
-      options: [{
-        value: 'au',
-        label: 'Australia'
-      }, {
-        value: 'uk',
-        label: 'United Kingdom'
-      }],
-      initialValue: 'uk'
-    }],
+function demoApp () {
+  const myForm = createForm({
+    fields: [
+      {
+        name: 'firstName',
+        label: 'First Name',
+        component: createTextInput,
+        autoFocus: true,
+        initialValue: 'Joe'
+      },
+      {
+        name: 'lastName',
+        label: 'Last Name',
+        component: createTextInput,
+        initialValue: 'Bloggs'
+      },
+      {
+        name: 'location',
+        label: 'Location',
+        component: createSelectInput,
+        options: [
+          {
+            value: 'au',
+            label: 'Australia'
+          },
+          {
+            value: 'uk',
+            label: 'United Kingdom'
+          }
+        ],
+        initialValue: 'uk'
+      },
+      {
+        name: 'active',
+        label: 'Active',
+        component: createCheckboxInput,
+        initialValue: true
+      }
+    ],
     onSubmit: (event, state) => {
       event.preventDefault();
       eventLog.unshift(['submitted', state]);

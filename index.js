@@ -1,9 +1,7 @@
 const minthril = require('minthril');
-const hyperx = require('hyperx');
+const html = require('hyperx')(minthril);
 
-function createForm (h, options) {
-  const html = hyperx(h);
-
+function createForm (options) {
   return minthril.createComponent(function (state, draw, component) {
     function handleCreate () {
       options.fields.forEach(field => {
@@ -21,10 +19,11 @@ function createForm (h, options) {
     return html`
       <form oncreate=${handleCreate} onsubmit=${event => options.onSubmit && options.onSubmit(event, state)}>
         ${options.fields.map(field => {
+          const id = field.id || Math.floor(Math.random() * 1e16);
           return html`
             <div class="form-group">
-              <label>${field.label}</label>
-              ${field.component(h, { ...field, onInput: handleInput })}
+              ${field.component.handlesOwnLabel ? null : html`<label for=${id}>${field.label}</label>`}
+              ${field.component({ id, ...field, onInput: handleInput })}
             </div>
           `;
         })}
@@ -32,7 +31,7 @@ function createForm (h, options) {
         <button>Submit</button>
       </form>
     `;
-  }, {});
+  }, {}, 'min-form');
 }
 
 module.exports = createForm;

@@ -1,9 +1,7 @@
 const minthril = require('minthril');
-const hyperx = require('hyperx');
+const html = require('hyperx')(minthril);
 
-function createFieldText (h, options) {
-  const html = hyperx(h);
-
+function createFieldText (options) {
   return minthril.createComponent(function (state, draw, component) {
     function handleInput (event) {
       state.value = event.target.value;
@@ -17,9 +15,9 @@ function createFieldText (h, options) {
     component.getValue = () => state.value;
 
     return html`
-      <input oncreate=${handleCreate} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${handleInput} />
+      <input id=${options.id} oncreate=${handleCreate} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${handleInput} />
     `;
-  }, options);
+  }, options, 'min-ui-form-text-input');
 }
 
 module.exports = createFieldText;

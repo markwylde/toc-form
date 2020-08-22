@@ -1,9 +1,7 @@
 const minthril = require('minthril');
-const hyperx = require('hyperx');
+const html = require('hyperx')(minthril);
 
-function createFieldSelect (h, options) {
-  const html = hyperx(h);
-
+function createFieldSelect (options) {
   return minthril.createComponent(function (state, draw, component) {
     function handleInput (event) {
       state.value = event.target.value;
@@ -17,13 +15,13 @@ function createFieldSelect (h, options) {
     component.getValue = () => state.value;
 
     return html`
-      <select oncreate=${handleCreate} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${handleInput}>
+      <select id=${options.id} oncreate=${handleCreate} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${handleInput}>
         ${options.options.map(option => html`
           <option value=${option.value}>${option.label}</option>
         `)}
       </select>
     `;
-  }, options);
+  }, options, 'min-ui-form-select-input');
 }
 
 module.exports = createFieldSelect;

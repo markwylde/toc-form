@@ -1,3 +1,6 @@
+/*
+  DEMO STYLING
+*/
 * {
   box-sizing: border-box;
 }
@@ -12,50 +15,14 @@ h3 { font-size: 100%; }
 h4 { font-size: 80%; }
 h5 { font-size: 60%; }
 
-nav a {
-  margin-right: 5px;
-}
-
-.infobox.expanded > div {
-  display: block;
-}
-.infobox > div {
-  display: none;
-  background-color: rgb(231, 231, 241);
-  padding: 10px;
-}
 
 .exampleFormContainer {
-  width: 400px;
+  max-width: 400px;
   padding: 10px;
   border: 2px solid black;
 }
 
-.exampleFormContainer .form-group {
-  margin-bottom: 10px;
-}
-
-.exampleFormContainer label:after {
-  content: ':';
-}
-.exampleFormContainer label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.exampleFormContainer input:focus {
-  border-color: blue;
-}
-.exampleFormContainer input {
-  width: 100%;
-  padding: 3px;
-  font-size: 100%;
-  font-weight: bold;
-  border: 2px solid black;
-  outline: none;
-}
-
-.exampleFormContainer button {
+button {
   border: 0;
   padding: 10px;
   cursor: pointer;
@@ -64,10 +31,66 @@ nav a {
   color: white;
 }
 
-.exampleFormContainer select:focus {
+/*
+  LIBRARY STYLING
+*/
+.form-group {
+  margin-bottom: 10px;
+}
+
+label:after {
+  content: ':';
+}
+label {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input:focus {
   border-color: blue;
 }
-.exampleFormContainer select {
+input {
+  width: 100%;
+  padding: 3px;
+  font-size: 100%;
+  font-weight: bold;
+  border: 2px solid black;
+  outline: none;
+}
+
+min-ui-form-checkbox-input {
+  margin: 20px 0 20px 0;
+  display: block;
+}
+
+min-ui-form-checkbox-input input:checked {
+  background-color: black;
+  box-shadow: inset 0 0 1px 2px white;
+}
+min-ui-form-checkbox-input input {
+  cursor: pointer;
+  appearance: none;
+  width: auto;
+  padding: 8px;
+  margin: 0;
+  vertical-align: text-top;
+}
+
+min-ui-form-checkbox-input label:after {
+  content: '';
+}
+min-ui-form-checkbox-input label {
+  display: inline;
+}
+min-ui-form-checkbox-input input {
+  width: auto;
+}
+
+min-ui-form-select-input select:focus {
+  border-color: blue;
+}
+min-ui-form-select-input select {
   cursor: pointer;
 
   font-weight: bold;
